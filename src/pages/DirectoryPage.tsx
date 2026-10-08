@@ -4,7 +4,7 @@ import { Search, Lock } from 'lucide-react';
 import { SITE_CONTENT } from '../data/content';
 import { PageMeta } from '../components/PageMeta';
 import { usePreviewToast } from '../components/ToastContext';
-import { Reveal } from '../components/ArchFrame';
+import { ArchPhotoFrame, Reveal, SITE_IMAGES } from '../components/ArchFrame';
 
 export const DirectoryPage: React.FC = () => {
   const { directory } = SITE_CONTENT;
@@ -72,7 +72,7 @@ export const DirectoryPage: React.FC = () => {
       <section id="create-account" className="py-16 lg:py-24 bg-[#FBF7F0]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-            {/* Left: How It Works */}
+            {/* Left: How It Works + Community Outreach Photo */}
             <div className="lg:col-span-7 space-y-10">
               <Reveal>
                 <h2 className="text-2xl sm:text-3xl font-serif-heading text-[#0E1A33] mb-3">
@@ -105,6 +105,16 @@ export const DirectoryPage: React.FC = () => {
                 ))}
               </div>
 
+              <Reveal>
+                <ArchPhotoFrame
+                  src={SITE_IMAGES.communityOutreach}
+                  alt="Church community outreach hall with woven baskets of fresh harvest produce and loaves of bread"
+                  caption="Connecting churches and Christian ministries with foundations and civic funders that support their mission."
+                  shape="editorial"
+                  aspectClass="aspect-[16/9]"
+                />
+              </Reveal>
+
               <p className="text-sm text-[#566070]">
                 Already have a member account?{' '}
                 <Link
@@ -118,7 +128,7 @@ export const DirectoryPage: React.FC = () => {
             </div>
 
             {/* Right: Create a Free Account inside an Arch Card */}
-            <Reveal className="lg:col-span-5">
+            <Reveal className="lg:col-span-5 lg:sticky lg:top-28">
               <div className="bg-[#F1E7D8] border border-[#C9A45C]/60 rounded-t-[130px] rounded-b-2xl pt-14 pb-8 px-6 sm:px-8">
                 <div className="text-center mb-6">
                   <p className="text-xs font-semibold text-[#C2490A] mb-1">

@@ -3,7 +3,7 @@ import { Phone, MapPin, Printer } from 'lucide-react';
 import { SITE_CONTENT } from '../data/content';
 import { PageMeta } from '../components/PageMeta';
 import { usePreviewToast } from '../components/ToastContext';
-import { Reveal } from '../components/ArchFrame';
+import { ArchPhotoFrame, Reveal, SITE_IMAGES } from '../components/ArchFrame';
 
 export const ContactPage: React.FC = () => {
   const { contactPage, contact, brand } = SITE_CONTENT;
@@ -194,7 +194,7 @@ export const ContactPage: React.FC = () => {
               </form>
             </Reveal>
 
-            {/* Right: Contact Details & Arch Topographic Map Placeholder */}
+            {/* Right: Contact Details & Front Royal / Shenandoah Valley Photo */}
             <div className="lg:col-span-5 space-y-8">
               <Reveal className="bg-[#F1E7D8] border border-[#C9A45C]/60 rounded-2xl p-6 sm:p-8 space-y-5">
                 <h2 className="text-2xl font-serif-heading text-[#0E1A33]">
@@ -239,42 +239,15 @@ export const ContactPage: React.FC = () => {
                 </div>
               </Reveal>
 
-              {/* Arch-Topped Map-Style Architectural Placeholder */}
-              <Reveal
-                role="img"
-                aria-label={`Location illustration for ${contact.fullAddress}`}
-                className="bg-[#0E1A33] text-[#FBF7F0] border border-[#C9A45C]/50 rounded-t-[130px] rounded-b-2xl pt-12 pb-8 px-6 text-center relative overflow-hidden"
-              >
-                <svg
-                  className="w-full h-36 mx-auto mb-3 text-[#C9A45C]"
-                  viewBox="0 0 360 130"
-                  fill="none"
-                  aria-hidden="true"
-                >
-                  {/* Shenandoah Valley topographic contour curves */}
-                  <path
-                    d="M 10 105 Q 95 65 180 90 T 350 75"
-                    stroke="currentColor"
-                    strokeOpacity="0.28"
-                    strokeWidth="1.25"
-                  />
-                  <path
-                    d="M 10 80 Q 110 40 190 68 T 350 52"
-                    stroke="currentColor"
-                    strokeOpacity="0.4"
-                    strokeWidth="1.25"
-                  />
-                  <line x1="60" y1="65" x2="300" y2="65" stroke="currentColor" strokeOpacity="0.25" strokeWidth="1" />
-                  <line x1="180" y1="15" x2="180" y2="115" stroke="currentColor" strokeOpacity="0.25" strokeWidth="1" />
-                  <circle cx="180" cy="65" r="18" stroke="#C9A45C" strokeOpacity="0.6" strokeWidth="1" />
-                  <circle cx="180" cy="65" r="6" fill="#F7630D" />
-                </svg>
-                <p className="text-lg font-serif-heading text-[#FBF7F0]">
-                  {contact.street} · {contact.cityStateZip}
-                </p>
-                <p className="text-xs text-[#C9A45C] mt-1">
-                  Map placeholder · Located in the Shenandoah Valley in Front Royal, Virginia
-                </p>
+              {/* Arch-Framed Shenandoah Valley Photo + Location Note */}
+              <Reveal>
+                <ArchPhotoFrame
+                  src={SITE_IMAGES.shenandoahValley}
+                  alt="Front Royal and the Shenandoah Valley in Virginia at golden hour with Blue Ridge mountains and historic town architecture"
+                  caption={`${contact.street} · ${contact.cityStateZip} — Located in the Shenandoah Valley in Front Royal, Virginia.`}
+                  shape="arch"
+                  aspectClass="aspect-[4/3]"
+                />
               </Reveal>
             </div>
           </div>

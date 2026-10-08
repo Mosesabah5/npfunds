@@ -5,7 +5,7 @@ import { SITE_CONTENT } from '../data/content';
 import { PageMeta } from '../components/PageMeta';
 import { SampleCopyBadge } from '../components/SampleCopyBadge';
 import { usePreviewToast } from '../components/ToastContext';
-import { Reveal } from '../components/ArchFrame';
+import { ArchPhotoFrame, Reveal, SITE_IMAGES } from '../components/ArchFrame';
 
 export const ServiceDetailPage: React.FC = () => {
   const { serviceId } = useParams<{ serviceId: string }>();
@@ -18,6 +18,32 @@ export const ServiceDetailPage: React.FC = () => {
   }
 
   const otherServices = SITE_CONTENT.services.filter((s) => s.id !== service.id);
+
+  // Pair each service package with an appropriate editorial photo
+  const servicePhotoMap: Record<string, { src: string; alt: string; caption: string }> = {
+    'jump-start': {
+      src: SITE_IMAGES.archivalStudy,
+      alt: 'Archival folders, leather-bound journal, and scripture on a walnut desk beside a sunlit arched window',
+      caption: 'Self-paced training modules and editable templates for your ministry team.',
+    },
+    'grant-ready': {
+      src: SITE_IMAGES.strategyTable,
+      alt: 'Grant proposal binder, fountain pen, and budget notes on a sunlit oak study table',
+      caption: 'Guided project concept, budget, and initial grant submissions.',
+    },
+    'full-service': {
+      src: SITE_IMAGES.sanctuary,
+      alt: 'Sunlit historic Virginia church sanctuary with arched windows and oak pews',
+      caption: 'A dedicated, experienced grant-writing team working alongside your ministry.',
+    },
+    'government-grants': {
+      src: SITE_IMAGES.communityOutreach,
+      alt: 'Church community outreach hall prepared with harvest produce and loaves of bread for neighborhood service',
+      caption: 'Federal, state, and local grant development for community-serving programs.',
+    },
+  };
+
+  const photo = servicePhotoMap[service.id] || servicePhotoMap['grant-ready'];
 
   return (
     <>
@@ -63,6 +89,16 @@ export const ServiceDetailPage: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
             <div className="lg:col-span-8 space-y-12">
+              <Reveal>
+                <ArchPhotoFrame
+                  src={photo.src}
+                  alt={photo.alt}
+                  caption={photo.caption}
+                  shape="editorial"
+                  aspectClass="aspect-[16/9]"
+                />
+              </Reveal>
+
               <Reveal>
                 <h2 className="text-2xl sm:text-3xl font-serif-heading text-[#0E1A33] mb-3">
                   What it is

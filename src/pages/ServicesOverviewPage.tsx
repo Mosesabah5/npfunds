@@ -4,7 +4,7 @@ import { ArrowRight } from 'lucide-react';
 import { SITE_CONTENT } from '../data/content';
 import { PageMeta } from '../components/PageMeta';
 import { MinistryGuideCard } from '../components/MinistryGuideCard';
-import { Reveal } from '../components/ArchFrame';
+import { ArchPhotoFrame, Reveal, SITE_IMAGES } from '../components/ArchFrame';
 
 export const ServicesOverviewPage: React.FC = () => {
   const { services, additionalCapabilities } = SITE_CONTENT;
@@ -129,20 +129,30 @@ export const ServicesOverviewPage: React.FC = () => {
         </div>
       </section>
 
-      {/* Additional Capabilities */}
+      {/* Additional Capabilities + Editorial Strategy Table Photo */}
       <section className="py-16 lg:py-24 bg-[#FBF7F0]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-            <Reveal className="lg:col-span-5">
-              <h2 className="text-2xl sm:text-3xl font-serif-heading text-[#0E1A33]">
-                {additionalCapabilities.heading}
-              </h2>
-              <div className="mt-4 mb-4">
-                <span className="ember-rule" aria-hidden="true" />
+            <Reveal className="lg:col-span-5 space-y-8">
+              <div>
+                <h2 className="text-2xl sm:text-3xl font-serif-heading text-[#0E1A33]">
+                  {additionalCapabilities.heading}
+                </h2>
+                <div className="mt-4 mb-4">
+                  <span className="ember-rule" aria-hidden="true" />
+                </div>
+                <p className="text-base text-[#566070] leading-relaxed">
+                  {additionalCapabilities.lead}
+                </p>
               </div>
-              <p className="text-base text-[#566070] leading-relaxed">
-                {additionalCapabilities.lead}
-              </p>
+
+              <ArchPhotoFrame
+                src={SITE_IMAGES.strategyTable}
+                alt="Grant proposal binder, fountain pen, and budget worksheet on an oak study table"
+                caption="Proposals written for federal, state and local government, foundations and civic groups."
+                shape="arch"
+                aspectClass="aspect-[4/3]"
+              />
             </Reveal>
 
             <div className="lg:col-span-7 divide-y divide-[#DDD0BC] border-y border-[#DDD0BC]">

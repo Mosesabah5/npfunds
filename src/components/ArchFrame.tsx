@@ -1,5 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
 
+export const SITE_IMAGES = {
+  sanctuary: '/src/assets/images/sanctuary_morning_light_1791501308600.jpg',
+  strategyTable: '/src/assets/images/ministry_strategy_table_1791501319577.jpg',
+  communityOutreach: '/src/assets/images/community_outreach_stewardship_1791501329660.jpg',
+  shenandoahValley: '/src/assets/images/shenandoah_valley_virginia_1791501338472.jpg',
+  archivalStudy: '/src/assets/images/archival_study_resources_1791501348427.jpg',
+};
+
 interface RevealProps {
   children: React.ReactNode;
   className?: string;
@@ -50,6 +58,68 @@ export const Reveal: React.FC<RevealProps> = ({
   );
 };
 
+interface ArchPhotoFrameProps {
+  src: string;
+  alt: string;
+  caption?: string;
+  shape?: 'arch' | 'editorial';
+  aspectClass?: string;
+  className?: string;
+}
+
+export const ArchPhotoFrame: React.FC<ArchPhotoFrameProps> = ({
+  src,
+  alt,
+  caption,
+  shape = 'arch',
+  aspectClass = 'aspect-[4/3]',
+  className = '',
+}) => {
+  const [failed, setFailed] = useState(false);
+
+  const borderRadiusClass =
+    shape === 'arch'
+      ? 'rounded-t-[180px] rounded-b-2xl'
+      : 'rounded-2xl';
+
+  return (
+    <figure className={`space-y-2.5 ${className}`}>
+      <div
+        className={`relative overflow-hidden bg-[#0E1A33] border border-[#C9A45C]/65 shadow-sm ${borderRadiusClass} ${aspectClass}`}
+      >
+        {!failed ? (
+          <img
+            src={src}
+            alt={alt}
+            referrerPolicy="no-referrer"
+            onError={() => setFailed(true)}
+            className="w-full h-full object-cover transition-transform duration-700 hover:scale-[1.02]"
+          />
+        ) : (
+          <div className="w-full h-full flex flex-col items-center justify-center p-6 text-center bg-[#0E1A33] text-[#FBF7F0]">
+            <SanctuaryArchMotif className="w-24 h-28 mb-2" />
+            <span className="text-xs text-[#C9A45C] font-medium">{alt}</span>
+          </div>
+        )}
+
+        {/* Subtle Inner Gold Keyline Overlay */}
+        <div
+          aria-hidden="true"
+          className={`pointer-events-none absolute inset-2 border border-[#C9A45C]/40 ${
+            shape === 'arch' ? 'rounded-t-[172px] rounded-b-xl' : 'rounded-xl'
+          }`}
+        />
+      </div>
+
+      {caption && (
+        <figcaption className="text-xs font-serif-heading italic text-[#566070] px-1">
+          {caption}
+        </figcaption>
+      )}
+    </figure>
+  );
+};
+
 interface ArchPortraitProps {
   initials: string;
   caption: string;
@@ -89,14 +159,12 @@ export const ArchPortrait: React.FC<ArchPortraitProps> = ({
         fill="none"
         aria-hidden="true"
       >
-        {/* Outer subtle arch */}
         <path
           d="M 12 248 L 12 100 A 88 88 0 0 1 188 100 L 188 248 Z"
           stroke="#C9A45C"
           strokeOpacity="0.45"
           strokeWidth="1"
         />
-        {/* Subtle radiating harvest/sanctuary lines */}
         <line x1="100" y1="24" x2="100" y2="68" stroke="#C9A45C" strokeOpacity="0.28" strokeWidth="1" />
         <line x1="100" y1="100" x2="42" y2="48" stroke="#C9A45C" strokeOpacity="0.2" strokeWidth="1" />
         <line x1="100" y1="100" x2="158" y2="48" stroke="#C9A45C" strokeOpacity="0.2" strokeWidth="1" />

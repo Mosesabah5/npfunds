@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { SITE_CONTENT } from '../data/content';
 import { PageMeta } from '../components/PageMeta';
-import { ArchPortrait, Reveal } from '../components/ArchFrame';
+import { ArchPhotoFrame, ArchPortrait, Reveal, SITE_IMAGES } from '../components/ArchFrame';
 
 export const AboutPage: React.FC = () => {
   const { about, missionVerse, stats } = SITE_CONTENT;
@@ -32,6 +32,16 @@ export const AboutPage: React.FC = () => {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
             {/* Left/Main Long-Form Narrative */}
             <div className="lg:col-span-7 space-y-12">
+              <Reveal>
+                <ArchPhotoFrame
+                  src={SITE_IMAGES.shenandoahValley}
+                  alt="Golden hour view of Front Royal in the Shenandoah Valley of Virginia with historic brick buildings, church steeple, and Blue Ridge mountains"
+                  caption="Rooted in Front Royal, Virginia in the Shenandoah Valley since 2000."
+                  shape="editorial"
+                  aspectClass="aspect-[16/9]"
+                />
+              </Reveal>
+
               <Reveal className="space-y-5">
                 <h2 className="text-2xl sm:text-3xl font-serif-heading text-[#0E1A33]">
                   {about.storyHeading}
@@ -80,7 +90,7 @@ export const AboutPage: React.FC = () => {
             </div>
 
             {/* Right: Sticky Side Summary on Desktop */}
-            <aside className="lg:col-span-5 lg:sticky lg:top-28">
+            <aside className="lg:col-span-5 lg:sticky lg:top-28 space-y-8">
               <div className="bg-[#F1E7D8] border border-[#C9A45C]/60 rounded-t-[110px] rounded-b-2xl pt-12 pb-8 px-6 sm:px-8 space-y-6">
                 <div className="text-center border-b border-[#DDD0BC] pb-5">
                   <p className="text-xs font-semibold text-[#C2490A] mb-1">
@@ -122,6 +132,14 @@ export const AboutPage: React.FC = () => {
                   </Link>
                 </div>
               </div>
+
+              <ArchPhotoFrame
+                src={SITE_IMAGES.sanctuary}
+                alt="Historic Virginia church interior with sunlit arched windows"
+                caption="Equipping the saints for the work of ministry."
+                shape="arch"
+                aspectClass="aspect-[4/3]"
+              />
             </aside>
           </div>
         </div>

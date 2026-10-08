@@ -5,7 +5,7 @@ import { SITE_CONTENT } from '../data/content';
 import { PageMeta } from '../components/PageMeta';
 import { SampleCopyBadge } from '../components/SampleCopyBadge';
 import { usePreviewToast } from '../components/ToastContext';
-import { Reveal } from '../components/ArchFrame';
+import { ArchPhotoFrame, Reveal, SITE_IMAGES } from '../components/ArchFrame';
 
 export const ResourcesPage: React.FC = () => {
   const { resources } = SITE_CONTENT;
@@ -41,20 +41,35 @@ export const ResourcesPage: React.FC = () => {
         </div>
       </section>
 
-      {/* Free Downloads Section */}
+      {/* Free Downloads Section + Archival Study Photo */}
       <section id="free-downloads" className="py-16 lg:py-24 bg-[#FBF7F0]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Reveal className="flex flex-wrap items-center justify-between gap-4 mb-10">
-            <div>
-              <h2 className="text-3xl sm:text-4xl font-serif-heading text-[#0E1A33]">
-                Free Downloads
-              </h2>
-              <div className="mt-3">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center mb-14">
+            <Reveal className="lg:col-span-7 space-y-4">
+              <div className="flex flex-wrap items-center gap-3">
+                <h2 className="text-3xl sm:text-4xl font-serif-heading text-[#0E1A33]">
+                  Free Downloads
+                </h2>
+                <SampleCopyBadge />
+              </div>
+              <div>
                 <span className="ember-rule" aria-hidden="true" />
               </div>
-            </div>
-            <SampleCopyBadge />
-          </Reveal>
+              <p className="text-base text-[#566070] leading-relaxed max-w-2xl">
+                Introductory checklists, worksheets, and briefing papers to help your church leadership or nonprofit board organize your project before approaching grantmakers.
+              </p>
+            </Reveal>
+
+            <Reveal className="lg:col-span-5">
+              <ArchPhotoFrame
+                src={SITE_IMAGES.archivalStudy}
+                alt="Archival study folders, leather-bound journal, and scripture volume on a walnut desk beside a sunlit arched window"
+                caption="Practical readiness checklists and planning worksheets for ministry leaders."
+                shape="editorial"
+                aspectClass="aspect-[16/10]"
+              />
+            </Reveal>
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {resources.downloads.map((dl, idx) => (

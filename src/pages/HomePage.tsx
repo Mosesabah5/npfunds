@@ -4,7 +4,13 @@ import { ArrowRight, Lock, Search } from 'lucide-react';
 import { SITE_CONTENT } from '../data/content';
 import { PageMeta } from '../components/PageMeta';
 import { MinistryGuideCard } from '../components/MinistryGuideCard';
-import { ArchPortrait, Reveal, SanctuaryArchMotif } from '../components/ArchFrame';
+import {
+  ArchPhotoFrame,
+  ArchPortrait,
+  Reveal,
+  SanctuaryArchMotif,
+  SITE_IMAGES,
+} from '../components/ArchFrame';
 
 export const HomePage: React.FC = () => {
   const { home, stats, services, directory, about, missionVerse, contact } = SITE_CONTENT;
@@ -17,9 +23,19 @@ export const HomePage: React.FC = () => {
     <>
       <PageMeta title={home.seo.title} description={home.seo.description} />
 
-      {/* 1. Hero (Midnight Navy, Full-Width, with Arch Guide & Bottom Stats Strip) */}
+      {/* 1. Hero (Midnight Navy, Full-Width, with Atmospheric Sanctuary Photo Scrim, Arch Guide & Bottom Stats Strip) */}
       <section className="relative navy-atmosphere navy-surface text-[#FBF7F0] overflow-hidden border-b border-[#C9A45C]/40">
-        {/* Background subtle architectural arch & light rays */}
+        {/* Subtle Architectural Sanctuary Backdrop Image with Measured Dark Navy Scrim */}
+        <div className="absolute inset-0 pointer-events-none select-none" aria-hidden="true">
+          <img
+            src={SITE_IMAGES.sanctuary}
+            alt=""
+            referrerPolicy="no-referrer"
+            className="w-full h-full object-cover opacity-20 mix-blend-luminosity"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0E1A33] via-[#0E1A33]/90 to-[#0E1A33]/80" />
+        </div>
+
         <SanctuaryArchMotif className="hidden lg:block absolute -right-16 -top-10 w-[520px] h-[620px] opacity-60" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 sm:pt-16 lg:pt-20 pb-14 lg:pb-16 relative z-10">
@@ -39,7 +55,7 @@ export const HomePage: React.FC = () => {
                 <span className="ember-rule" aria-hidden="true" />
               </div>
 
-              <p className="text-lg sm:text-xl text-[#FBF7F0]/85 leading-relaxed max-w-2xl mb-9">
+              <p className="text-lg sm:text-xl text-[#FBF7F0]/90 leading-relaxed max-w-2xl mb-9">
                 {home.hero.lead}
               </p>
 
@@ -87,21 +103,31 @@ export const HomePage: React.FC = () => {
         </div>
       </section>
 
-      {/* 2. Why Ministries Choose Us (Two-Column Asymmetric Editorial Split) */}
+      {/* 2. Why Ministries Choose Us (Two-Column Asymmetric Editorial Split with Sanctuary Arch Photo) */}
       <section className="py-20 lg:py-28 bg-[#FBF7F0] border-b border-[#DDD0BC]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-            {/* Left Statement */}
-            <Reveal className="lg:col-span-5 lg:sticky lg:top-28">
-              <h2 className="text-3xl sm:text-4xl lg:text-[2.75rem] font-serif-heading text-[#0E1A33] leading-[1.12]">
-                {home.whyChoose.heading}
-              </h2>
-              <div className="mt-5 mb-5">
-                <span className="ember-rule" aria-hidden="true" />
+            {/* Left Statement + Arch Sanctuary Photo */}
+            <Reveal className="lg:col-span-5 space-y-8">
+              <div>
+                <h2 className="text-3xl sm:text-4xl lg:text-[2.75rem] font-serif-heading text-[#0E1A33] leading-[1.12]">
+                  {home.whyChoose.heading}
+                </h2>
+                <div className="mt-5 mb-5">
+                  <span className="ember-rule" aria-hidden="true" />
+                </div>
+                <p className="text-base sm:text-lg text-[#566070] leading-relaxed">
+                  {SITE_CONTENT.brand.corePromise}
+                </p>
               </div>
-              <p className="text-base sm:text-lg text-[#566070] leading-relaxed">
-                {SITE_CONTENT.brand.corePromise}
-              </p>
+
+              <ArchPhotoFrame
+                src={SITE_IMAGES.sanctuary}
+                alt="Sunlit historic Virginia church sanctuary with arched windows and oak pews"
+                caption="Supporting churches, Christian ministries, and mission-driven nonprofits since 2000."
+                shape="arch"
+                aspectClass="aspect-[4/3]"
+              />
             </Reveal>
 
             {/* Right Three Numbered Reasons (Real numerals 1, 2, 3, plain list rows with hairline dividers) */}
@@ -133,11 +159,11 @@ export const HomePage: React.FC = () => {
         </div>
       </section>
 
-      {/* 3. Your Path to Funding (Visual Pathway: 3 Connected Stages + Separate Government Track) */}
+      {/* 3. Your Path to Funding (Visual Pathway + Editorial Grant Preparation Photo) */}
       <section className="py-20 lg:py-28 bg-[#FBF7F0]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Reveal className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">
-            <div className="max-w-2xl">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center mb-16">
+            <Reveal className="lg:col-span-7">
               <p className="text-sm font-semibold text-[#C2490A] mb-2">
                 Your path to funding
               </p>
@@ -147,19 +173,28 @@ export const HomePage: React.FC = () => {
               <div className="mt-4 mb-4">
                 <span className="ember-rule" aria-hidden="true" />
               </div>
-              <p className="text-base text-[#566070] leading-relaxed">
+              <p className="text-base sm:text-lg text-[#566070] leading-relaxed mb-6">
                 {home.servicesSection.lead}
               </p>
-            </div>
+              <Link
+                to="/services"
+                className="inline-flex items-center gap-2 text-base font-semibold text-[#0E1A33] hover:text-[#C2490A] transition-colors whitespace-nowrap"
+              >
+                <span>Compare all four packages</span>
+                <ArrowRight className="w-4 h-4 text-[#F7630D]" aria-hidden="true" />
+              </Link>
+            </Reveal>
 
-            <Link
-              to="/services"
-              className="inline-flex items-center gap-2 text-base font-semibold text-[#0E1A33] hover:text-[#C2490A] transition-colors whitespace-nowrap"
-            >
-              <span>Compare all four packages</span>
-              <ArrowRight className="w-4 h-4 text-[#F7630D]" aria-hidden="true" />
-            </Link>
-          </Reveal>
+            <Reveal className="lg:col-span-5">
+              <ArchPhotoFrame
+                src={SITE_IMAGES.strategyTable}
+                alt="Grant proposal binder, fountain pen, and budget notes on a sunlit oak study table"
+                caption="Careful project concept, budget, and proposal preparation."
+                shape="editorial"
+                aspectClass="aspect-[16/10]"
+              />
+            </Reveal>
+          </div>
 
           {/* Three Connected Stages along a Horizontal Pathway Line */}
           <div className="relative">
@@ -444,42 +479,53 @@ export const HomePage: React.FC = () => {
         </div>
       </section>
 
-      {/* 6. Client Stories Placeholder (Restyled as a Calm, Intentional Archival Empty-State) */}
+      {/* 6. Client Stories Placeholder paired with Community Outreach Editorial Photography */}
       <section className="py-20 lg:py-24 bg-[#FBF7F0]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Reveal className="max-w-4xl mx-auto">
-            <div className="mb-8">
-              <h2 className="text-2xl sm:text-3xl font-serif-heading text-[#0E1A33]">
-                {home.clientStoriesPlaceholder.heading}
-              </h2>
-              <div className="mt-3">
-                <span className="ember-rule" aria-hidden="true" />
-              </div>
-            </div>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+            <Reveal className="lg:col-span-5">
+              <ArchPhotoFrame
+                src={SITE_IMAGES.communityOutreach}
+                alt="Church community outreach hall with woven baskets of fresh harvest produce and loaves of bread prepared for neighborhood ministry"
+                caption="Equipping local churches and ministries to serve their communities."
+                shape="arch"
+                aspectClass="aspect-[4/3]"
+              />
+            </Reveal>
 
-            <div className="relative bg-[#F1E7D8]/75 border border-[#C9A45C]/70 rounded-2xl p-8 sm:p-12 overflow-hidden flex flex-col sm:flex-row items-start sm:items-center gap-8">
-              {/* Calm Archival Window Ornament */}
-              <div
-                aria-hidden="true"
-                className="w-20 h-28 rounded-t-full border border-[#C9A45C] bg-[#FBF7F0] flex flex-col items-center justify-center shrink-0"
-              >
-                <span className="w-2.5 h-2.5 rounded-full bg-[#C9A45C] mb-2" />
-                <span className="w-8 h-[1px] bg-[#C9A45C]" />
+            <Reveal className="lg:col-span-7">
+              <div className="mb-6">
+                <h2 className="text-3xl sm:text-4xl font-serif-heading text-[#0E1A33]">
+                  {home.clientStoriesPlaceholder.heading}
+                </h2>
+                <div className="mt-3">
+                  <span className="ember-rule" aria-hidden="true" />
+                </div>
               </div>
 
-              <div className="space-y-2">
-                <p className="text-xs font-semibold text-[#C2490A]">
-                  Editorial placeholder
-                </p>
-                <p className="text-xl sm:text-2xl font-serif-heading text-[#0E1A33]">
-                  {home.clientStoriesPlaceholder.boxLabel}
-                </p>
-                <p className="text-sm sm:text-base text-[#566070]">
-                  {home.clientStoriesPlaceholder.subNote}
-                </p>
+              <div className="relative bg-[#F1E7D8]/75 border border-[#C9A45C]/70 rounded-2xl p-8 sm:p-10 overflow-hidden flex flex-col sm:flex-row items-start sm:items-center gap-6">
+                <div
+                  aria-hidden="true"
+                  className="w-16 h-24 rounded-t-full border border-[#C9A45C] bg-[#FBF7F0] flex flex-col items-center justify-center shrink-0"
+                >
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#C9A45C] mb-2" />
+                  <span className="w-7 h-[1px] bg-[#C9A45C]" />
+                </div>
+
+                <div className="space-y-2">
+                  <p className="text-xs font-semibold text-[#C2490A]">
+                    Editorial placeholder
+                  </p>
+                  <p className="text-xl sm:text-2xl font-serif-heading text-[#0E1A33]">
+                    {home.clientStoriesPlaceholder.boxLabel}
+                  </p>
+                  <p className="text-sm sm:text-base text-[#566070]">
+                    {home.clientStoriesPlaceholder.subNote}
+                  </p>
+                </div>
               </div>
-            </div>
-          </Reveal>
+            </Reveal>
+          </div>
         </div>
       </section>
 
