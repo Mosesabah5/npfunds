@@ -1,0 +1,161 @@
+@import "tailwindcss";
+
+:root {
+  --color-navy: #0E1A33;
+  --color-navy-deep: #091224;
+  --color-ivory: #FBF7F0;
+  --color-sand: #F1E7D8;
+  --color-sand-border: #DDD0BC;
+  --color-ember: #F7630D;
+  --color-ember-text: #C2490A;
+  --color-gold: #C9A45C;
+  --color-ink: #14161C;
+  --color-muted: #566070;
+  --font-serif: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-sans: "Instrument Sans", system-ui, -apple-system, sans-serif;
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    font-size: 18px;
+    line-height: 1.65;
+    color: var(--color-ink);
+    background-color: var(--color-ivory);
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.65;
+    color: var(--color-ink);
+    background-color: var(--color-ivory);
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, .font-serif-heading {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    line-height: 1.12;
+    text-wrap: balance;
+    font-variation-settings: "SOFT" 50, "WONK" 0;
+  }
+
+  *:focus-visible {
+    outline: 3px solid var(--color-ember);
+    outline-offset: 3px;
+  }
+}
+
+.navy-surface *:focus-visible {
+  outline: 3px solid var(--color-ivory);
+  outline-offset: 3px;
+}
+
+/* Short ember rule replacing old hatched underline */
+.ember-rule {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 3px;
+}
+
+.ember-rule::before {
+  content: "";
+  display: block;
+  width: 56px;
+  height: 3px;
+  background-color: var(--color-ember);
+  border-radius: 2px;
+}
+
+.ember-rule::after {
+  content: "";
+  display: block;
+  width: 6px;
+  height: 6px;
+  background-color: var(--color-gold);
+  transform: rotate(45deg);
+}
+
+/* Subtle architectural grain & light rays on Midnight Navy */
+.navy-atmosphere {
+  background-color: var(--color-navy);
+  background-image:
+    radial-gradient(circle at 82% 14%, rgba(201, 164, 92, 0.11) 0%, transparent 48%),
+    radial-gradient(circle at 12% 88%, rgba(247, 99, 13, 0.06) 0%, transparent 45%);
+}
+
+/* Animated nav link underline */
+.nav-link-editorial {
+  position: relative;
+}
+
+.nav-link-editorial::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 2px;
+  background-color: var(--color-ember);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nav-link-editorial:hover::after,
+.nav-link-editorial[aria-current="page"]::after,
+.nav-link-editorial.is-active::after {
+  transform: scaleX(1);
+}
+
+/* Subtle button hover lift */
+.btn-lift {
+  transition: transform 180ms cubic-bezier(0.16, 1, 0.3, 1), background-color 180ms ease, border-color 180ms ease, color 180ms ease;
+}
+
+.btn-lift:hover {
+  transform: translateY(-2px);
+}
+
+.btn-lift:active {
+  transform: translateY(0);
+}
+
+/* Scroll reveal animation (400ms, once) */
+.reveal-block {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 400ms cubic-bezier(0.16, 1, 0.3, 1), transform 400ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-block.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal-block {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .btn-lift {
+    transition: none !important;
+    transform: none !important;
+  }
+  .nav-link-editorial::after {
+    transition: none !important;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
